@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "auth-backend-sage.vercel.app"; //
+const BASE_URL = "https://auth-backend-sage.vercel.app"; //
 
 export const registerUser = async (email, password) => {
   try {
