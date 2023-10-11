@@ -4,15 +4,21 @@ import { registerUser } from "./api";
 export const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registrationError, setRegistrationError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await registerUser(email, password);
       console.log(response);
+      setRegistrationError("");
       props.onRegistrationSuccess();
     } catch (error) {
-      console.error(error);
+      setRegistrationError(error.message); // Set the registration error message in state
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -37,7 +43,13 @@ export const Register = (props) => {
           placeholder="***"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Sign up</button>
+        <button type="submit" className="button-container" disabled={isLoading}>
+          {isLoading ? <div className="loader" /> : "Sign up"}
+        </button>
+
+        {registrationError && (
+          <div className="error-message">{registrationError}</div>
+        )}
       </form>
       <button onClick={() => props.onFormSwitch("login")}>Login here</button>
     </div>

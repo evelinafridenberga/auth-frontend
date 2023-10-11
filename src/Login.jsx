@@ -1,25 +1,29 @@
 import React, { useState } from "react";
-import { loginUser } from "./api"; // Import the login function
+import { loginUser } from "./api";
 
 export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State to store error messages
+  const [loginError, setLoginError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await loginUser(email, password);
       console.log(response); // Handle successful login
+      setLoginError("");
+      props.onLoginSuccess();
     } catch (error) {
-      setError(error.message); // Set the error message in state
+      setLoginError(error.message); // Set the login error message in state
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="auth-container">
-      {error && <p className="error-message">{error}</p>}{" "}
-      {/* Display error message */}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -39,7 +43,11 @@ export const Login = (props) => {
           placeholder="***"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Log in</button>
+        <button type="submit" className="button-container" disabled={isLoading}>
+          {isLoading ? <div className="loader" /> : "Log in"}
+        </button>
+
+        {loginError && <div className="error-message">{loginError}</div>}
       </form>
       {props.onFormSwitch && (
         <button onClick={() => props.onFormSwitch("register")}>

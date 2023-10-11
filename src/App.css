@@ -19,7 +19,7 @@ form {
   width: 100%;
   padding: 20px;
   background-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -27,13 +27,18 @@ label {
   font-size: 1.2rem;
   margin-bottom: 5px;
   color: #333;
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  padding: 0 3px;
+  margin-top: 3px;
 }
 
 input {
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 10px;
   font-size: 1rem;
 }
 
@@ -43,7 +48,7 @@ button[type="submit"] {
   font-size: 1.2rem;
   padding: 10px 20px;
   border: none;
-  border-radius: 3px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -57,7 +62,8 @@ button {
   border: none;
   color: #007bff;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  padding: 15px 20px;
   text-decoration: underline;
 }
 
@@ -70,4 +76,33 @@ button:hover {
   display: flex;
   min-height: 100vh;
   justify-content: center;
+}
+.error-message {
+  color: red;
+  background-color: #ffcccc;
+  border: 2px solid #ff3333;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+/* Add this CSS for the loader animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+  display: inline-block;
 }
