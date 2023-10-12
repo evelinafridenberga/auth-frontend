@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { loginUser } from "./api";
+import { loginUser } from "../../middleware/api";
 
 export const Login = (props) => {
   const [email, setEmail] = useState("");
