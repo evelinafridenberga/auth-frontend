@@ -1,19 +1,21 @@
 import axios from "axios";
 
 //const BASE_URL = "http://localhost:3001";
-// const proxyBaseUrl = "http://localhost:3001";
+//const proxyBaseUrl = "http://192.168.200.203";
 
-// const axiosInstance = axios.create({
-//   baseURL: proxyBaseUrl,
-//   headers: {
-//     "Content-Type": "application/json",
-//     // Add any other custom headers here
-//   },
-// });
+const proxyBaseUrl = "http://localhost:3001";
+
+const axiosInstance = axios.create({
+  baseURL: proxyBaseUrl,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
 
 export const registerUser = async (email, password) => {
   try {
-    const response = await axios.post("/api/register", {
+    const response = await axiosInstance.post("/api/register", {
       email,
       password,
     });
@@ -34,7 +36,7 @@ export const registerUser = async (email, password) => {
 
 export const loginUser = async (email, password) => {
   try {
-    const response = await axios.post("/api/login", {
+    const response = await axiosInstance.post("/api/login", {
       email,
       password,
     });
